@@ -17,7 +17,7 @@ public class ImportButtonController {
     }
 
     public void importFile(ActionEvent event){
-        String trainStations[] = null;
+        String trainStations[];
         FileChooser fileChooser = new FileChooser();
         File file;
         String user = System.getProperty("user.name");
@@ -34,10 +34,8 @@ public class ImportButtonController {
             catch (Exception e) {
                 throw new RuntimeException(e);
             }
+
+            mainController.startUpKiwiland(trainStations);
         }
-
-        mainController.startUpKiwiland(trainStations);
     }
-
-
 }
