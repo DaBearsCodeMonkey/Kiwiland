@@ -6,14 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DirectedGraphForTrainRoutes {
-    private int numberOfTrainStations;
     private static int outputNumber = 0;
     private List<RouteAndDistance> adjListArray[];
     private Utility utility = new Utility();
 
     @SuppressWarnings("unchecked")
     public DirectedGraphForTrainRoutes(int numberOfTrainStations) {
-        this.numberOfTrainStations = numberOfTrainStations;
         adjListArray = new ArrayList[numberOfTrainStations];
 
         for(int counter = 0; counter < numberOfTrainStations; counter++){
