@@ -8,7 +8,7 @@ class DirectedGraphForTrainRoutesTest extends Specification {
         given: "A new graph object"
         def graph = new DirectedGraphForTrainRoutes(5)
         def graphHelper = new BuildTrainStationHelper()
-        graphHelper.buildGraphFromCommandLineArguments(graph, (String[])["AB5","BC4","CD8","DC8","DE6","AD5","CE2","EB3","AE7"])
+        graphHelper.buildGraph(graph, (String[])["AB5", "BC4", "CD8", "DC8", "DE6", "AD5", "CE2", "EB3", "AE7"])
 
         when:
         def actualResult = graph.getTotalDistance(args)
