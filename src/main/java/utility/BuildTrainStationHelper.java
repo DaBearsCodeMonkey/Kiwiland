@@ -1,6 +1,6 @@
 package utility;
 
-import graph.DirectedGraphForTrainRoutes;
+import serviceimpl.DirectedGraphServiceImpl;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,14 +19,14 @@ public class BuildTrainStationHelper {
         return uniqueCharacters.size();
     }
 
-    public void buildGraph(DirectedGraphForTrainRoutes myGraph, String[] trainStations){
+    public void buildGraph(DirectedGraphServiceImpl myGraph, String[] trainStations){
         int source;
         int destination;
         int distance;
 
         for(String trainStation : trainStations){
-            source = utility.getIntValueOfChar(trainStation.toLowerCase().charAt(0));
-            destination = utility.getIntValueOfChar(trainStation.toLowerCase().charAt(1));
+            source = utility.getIntValueOfChar(trainStation.charAt(0));
+            destination = utility.getIntValueOfChar(trainStation.charAt(1));
             distance = Character.getNumericValue(trainStation.charAt(2));
 
             myGraph.addRoute(source, destination, distance);

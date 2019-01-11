@@ -4,7 +4,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controllers.MainController"
+            fx:controller="controllers.MainController"
             prefHeight="200.0" prefWidth="200.0">
 
     <fx:include fx:id="importButton" source="import.fxml"/>

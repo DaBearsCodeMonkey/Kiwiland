@@ -7,7 +7,7 @@
             prefWidth="200.0"
             xmlns="http://javafx.com/javafx/8.0.172-ea"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Controllers.ImportButtonController">
+            fx:controller="controllers.ImportButtonController">
 
     <Button layoutX="63.0"
             layoutY="88.0"

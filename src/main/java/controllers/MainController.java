@@ -1,6 +1,6 @@
-package Controllers;
+package controllers;
 
-import graph.DirectedGraphForTrainRoutes;
+import serviceimpl.DirectedGraphServiceImpl;
 import javafx.fxml.FXML;
 import utility.BuildTrainStationHelper;
 
@@ -15,7 +15,7 @@ public class MainController {
 
     void startUpKiwiland(String[] trainStations){
         BuildTrainStationHelper buildTrainStationHelper = new BuildTrainStationHelper();
-        DirectedGraphForTrainRoutes kiwilandTrainStations = new DirectedGraphForTrainRoutes(buildTrainStationHelper.getNumberOfUniqueTrainStations(trainStations));
+        DirectedGraphServiceImpl kiwilandTrainStations = new DirectedGraphServiceImpl(buildTrainStationHelper.getNumberOfUniqueTrainStations(trainStations));
         buildTrainStationHelper.buildGraph(kiwilandTrainStations, trainStations);
     }
 }
