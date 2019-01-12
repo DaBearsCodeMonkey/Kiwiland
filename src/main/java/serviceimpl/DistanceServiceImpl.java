@@ -1,18 +1,18 @@
 package serviceimpl;
 
 import service.DistanceService;
-import service.pojos.RouteAndDistance;
+import service.pojos.Edge;
 import utility.Utility;
 
 import java.util.List;
 
 public class DistanceServiceImpl implements DistanceService {
+    private final List<Edge> graph[];
+    private final Utility utility;
 
-    private final List<RouteAndDistance> adjListArray[];
-    private Utility utility = new Utility();
-
-    public DistanceServiceImpl(List<RouteAndDistance>[] adjListArray) {
-        this.adjListArray = adjListArray;
+    public DistanceServiceImpl(List<Edge>[] graph) {
+        this.graph = graph;
+        utility = new Utility();
     }
 
     @Override
@@ -29,9 +29,9 @@ public class DistanceServiceImpl implements DistanceService {
             station2 = utility.getIntValueOfChar(trainStations.charAt(counter + 1));
             destinationWasFound = false;
 
-            for(RouteAndDistance routeAndDistance: adjListArray[station1]){
-                if(station2 == routeAndDistance.getRoute()){
-                    totalDistance += routeAndDistance.getDistance();
+            for(Edge edge : graph[station1]){
+                if(station2 == edge.getRoute()){
+                    totalDistance += edge.getDistance();
                     destinationWasFound = true;
                 }
             }

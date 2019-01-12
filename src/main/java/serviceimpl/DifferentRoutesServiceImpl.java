@@ -1,7 +1,7 @@
 package serviceimpl;
 
 import service.DifferentRoutesService;
-import service.pojos.RouteAndDistance;
+import service.pojos.Edge;
 import service.pojos.RouteAndDistanceFromSource;
 import utility.Utility;
 
@@ -9,12 +9,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class DifferentRoutesServiceImpl implements DifferentRoutesService {
+    private final List<Edge> graph[];
+    private final Utility utility;
 
-    private final List<RouteAndDistance> adjListArr[];
-    private final Utility utility = new Utility();
-
-    public DifferentRoutesServiceImpl(List<RouteAndDistance>[] adjListArr) {
-        this.adjListArr = adjListArr;
+    public DifferentRoutesServiceImpl(List<Edge>[] graph) {
+        this.graph = graph;
+        utility = new Utility();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class DifferentRoutesServiceImpl implements DifferentRoutesService {
             }
 
             if(currentDistance < maxDistance) {
-                for (RouteAndDistance temp : adjListArr[index]) {
+                for (Edge temp : graph[index]) {
                     queue.add(new RouteAndDistanceFromSource(temp.getRoute(), currentDistance + temp.getDistance()));
                 }
             }

@@ -1,20 +1,20 @@
 package serviceimpl;
 
 import service.AllRoutesService;
-import service.pojos.RouteAndDistance;
+import service.pojos.Edge;
 import utility.Utility;
 
 import java.util.List;
 
 /*Modified depth first search algorithm without a visited variable because cycles are allowed*/
 public class AllRoutesServiceImpl implements AllRoutesService {
-
-    private final List<RouteAndDistance> adjListArr[];
-    private final Utility utility = new Utility();
+    private final List<Edge> graph[];
+    private final Utility utility;
     private static int totalNumberOfRoutes;
 
-    public AllRoutesServiceImpl(List<RouteAndDistance> adjListArr[]){
-        this.adjListArr = adjListArr;
+    public AllRoutesServiceImpl(List<Edge> graph[]){
+        this.graph = graph;
+        utility = new Utility();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AllRoutesServiceImpl implements AllRoutesService {
             return;
         }
 
-        for(RouteAndDistance temp : adjListArr[index]){
+        for(Edge temp : graph[index]){
             findAllPathsExact(temp.getRoute(), destination, currentStop + 1, maxStops);
         }
     }
@@ -67,7 +67,7 @@ public class AllRoutesServiceImpl implements AllRoutesService {
             return;
         }
 
-        for(RouteAndDistance temp : adjListArr[index]){
+        for(Edge temp : graph[index]){
             findAllPathsMaximum(temp.getRoute(), destination, currentStop + 1, maxStops);
         }
     }

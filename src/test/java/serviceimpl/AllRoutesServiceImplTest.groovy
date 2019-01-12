@@ -12,7 +12,7 @@ class AllRoutesServiceImplTest extends Specification {
         def graph = new DirectedGraphServiceImpl(5)
         def graphHelper = new BuildTrainStationHelper()
         graphHelper.buildGraph(graph, (String[])["AB5", "BC4", "CD8", "DC8", "DE6", "AD5", "CE2", "EB3", "AE7"])
-        def service =  new AllRoutesServiceImpl(graph.getAdjListArray())
+        def service =  new AllRoutesServiceImpl(graph.getGraph())
 
         when:
         def actualResult = service.getNumberOfStops(startingStation, endingStation, numberOfStops, path)

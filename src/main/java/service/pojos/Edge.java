@@ -1,10 +1,10 @@
 package service.pojos;
 
-public class RouteAndDistance {
+public class Edge {
     private Integer route;
     private Integer distance;
 
-    public RouteAndDistance(Integer route, Integer distance) {
+    public Edge(Integer route, Integer distance) {
         this.route = route;
         this.distance = distance;
     }
