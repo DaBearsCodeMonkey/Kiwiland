@@ -1,8 +1,8 @@
 package serviceimpl;
 
-import service.DijkstraService;
+import service.ShortestPathService;
 
-public class DijkstraServiceImpl implements DijkstraService {
+public class ShortestPathServiceImpl implements ShortestPathService {
     @Override
     public String getShortestRoute(char startingStation, char endingStation) {
         return null;

@@ -1,5 +1,5 @@
 package service;
 
 public interface DifferentRoutesService {
-    String differentRoutes(char startingStation, char endingStation);
+    String getDifferentRoutes(char startingStation, char endingStation, int maxDistance);
 }

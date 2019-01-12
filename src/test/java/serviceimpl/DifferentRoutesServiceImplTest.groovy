@@ -12,13 +12,14 @@ class DifferentRoutesServiceImplTest extends Specification {
         def service = new DifferentRoutesServiceImpl(graph.adjListArray)
 
         when:
-        def actualResult = service.differentRoutes(startingStation, endingStation)
+        def actualResult = service.getDifferentRoutes(startingStation, endingStation, maxDistance)
 
         then:
         actualResult == expectedResult
 
         where:
-        startingStation | endingStation | expectedResult
-        'C' as char     | 'C' as char   | "7"
+        startingStation | endingStation | maxDistance | expectedResult
+        'C' as char     | 'C' as char   | 30          | "7"
+        'E' as char     | 'A' as char   | 25          | "0"
     }
 }
