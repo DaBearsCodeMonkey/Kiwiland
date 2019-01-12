@@ -17,37 +17,63 @@ public class ShortestPathServiceImpl implements ShortestPathService {
         SIZE = graph.length;
     }
 
+    /*Does a check to see if the source is the same as the destination. If true, then it looks for the shortest path
+    * from itself to it's neighbor + it's neighbor + itself. If false, it just does the normal Dijkstra shortest path
+    * algorithm.*/
     @Override
     public String getShortestRoute(char startingStation, char endingStation) {
         int source = utility.getIntValueOfChar(startingStation);
         int destination = utility.getIntValueOfChar(endingStation);
+        int shortestDistance = 0;
+
+        if(source == destination){
+            for(Edge e : graph[source]){
+                int currentDistance = dijkstraShortestPath(source, e.getRoute()) + dijkstraShortestPath(e.getRoute(), source);
+
+                if(shortestDistance == 0 || shortestDistance > currentDistance){
+                    shortestDistance = currentDistance;
+                }
+            }
+        }
+
+        else{
+            shortestDistance = dijkstraShortestPath(source, destination);
+        }
+
+
+        return String.valueOf(shortestDistance);
+    }
+
+    /*Dijkstra algorithm to find the shortest path*/
+    private int dijkstraShortestPath(int source, int destination){
         int[] distance = new int[SIZE];
-        boolean spt[] = new boolean[SIZE];
+        boolean shortestPathTree[] = new boolean[SIZE];
 
         for(int counter = 0; counter < SIZE; counter++){
             distance[counter] = Integer.MAX_VALUE;
-            spt[counter] = false;
+            shortestPathTree[counter] = false;
         }
 
         distance[source] = 0;
 
         for(int count = 0; count < SIZE - 1; count++){
-            int u = getMinDistance(distance, spt);
-            spt[u] = true;
+            int u = getMinDistance(distance, shortestPathTree);
+            shortestPathTree[u] = true;
 
             for(Edge e : graph[u]){
-                if(!spt[e.getRoute()] &&
-                   distance[u] != Integer.MAX_VALUE &&
-                   distance[u] + e.getDistance() < distance[e.getRoute()]){
+                if(!shortestPathTree[e.getRoute()] &&
+                        distance[u] != Integer.MAX_VALUE &&
+                        distance[u] + e.getDistance() < distance[e.getRoute()]){
 
                     distance[e.getRoute()] = distance[u] + e.getDistance();
                 }
             }
         }
 
-        return String.valueOf(distance[destination]);
+        return distance[destination];
     }
 
+    /*Helper fucntion to find the minimum distance*/
     private int getMinDistance(int distance[], boolean spt[]){
         int min = Integer.MAX_VALUE;
         int min_index = -1;

@@ -15,6 +15,7 @@ public class DistanceServiceImpl implements DistanceService {
         utility = new Utility();
     }
 
+    /*Iterates through the trainStation to get the total distance of any given String*/
     @Override
     public String getTotalDistance(String trainStations){
         trainStations = utility.removeDashesFromString(trainStations);

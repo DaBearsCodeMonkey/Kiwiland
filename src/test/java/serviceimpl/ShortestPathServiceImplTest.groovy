@@ -4,7 +4,7 @@ import spock.lang.Specification
 import utility.BuildTrainStationHelper
 
 class ShortestPathServiceImplTest extends Specification {
-    def "Returns the shortest part when given two points"(){
+    def "Returns the shortest path (String) when given two points. Does a check to see if source == destination"(){
         given:
         def graph = new DirectedGraphServiceImpl(5)
         def graphHelper = new BuildTrainStationHelper()
@@ -20,7 +20,30 @@ class ShortestPathServiceImplTest extends Specification {
         where:
         startingStation | endingStation | expectedResult
         'A' as char     | 'C' as char   | "9"
-//        'C' as char     | 'C' as char   | "9"
+        'D' as char     | 'B' as char   | "9"
+        'A' as char     | 'E' as char   | "7"
+        'E' as char     | 'D' as char   | "15"
+    }
+
+    def "Returns the shortest part (int) when given two points"(){
+        given:
+        def graph = new DirectedGraphServiceImpl(5)
+        def graphHelper = new BuildTrainStationHelper()
+        graphHelper.buildGraph(graph, (String[])["AB5", "BC4", "CD8", "DC8", "DE6", "AD5", "CE2", "EB3", "AE7"])
+        def service = new ShortestPathServiceImpl(graph.getGraph())
+
+        when:
+        def actualResult = service.dijkstraShortestPath(startingStation, endingStation)
+
+        then:
+        actualResult == expectedResult
+
+        where:
+        startingStation | endingStation | expectedResult
+        0               | 2             | 9
+        3               | 1             | 9
+        0               | 4             | 7
+        4               | 3             | 15
     }
 
     def "Find the vertex with minimum distance value and return the index of the array"(){

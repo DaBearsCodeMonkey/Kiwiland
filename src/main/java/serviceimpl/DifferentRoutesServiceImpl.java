@@ -17,6 +17,8 @@ public class DifferentRoutesServiceImpl implements DifferentRoutesService {
         utility = new Utility();
     }
 
+    /*Does a modified Breadth First Search to find all the different routes when given a maximum distance.
+    * Requirements stated it was not inclusive so I made it so it is not inclusive of the maxDistance*/
     @Override
     public String getDifferentRoutes(char startingStation, char endingStation, int maxDistance) {
         LinkedList<RouteAndDistanceFromSource> queue = new LinkedList<>();

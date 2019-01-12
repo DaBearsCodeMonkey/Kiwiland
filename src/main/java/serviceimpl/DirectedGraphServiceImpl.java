@@ -6,6 +6,7 @@ import service.pojos.Edge;
 import java.util.ArrayList;
 import java.util.List;
 
+/*This class builds the graph needed for the whole assignment*/
 public class DirectedGraphServiceImpl implements DirectedGraphService {
     private final List<Edge> graph[];
 

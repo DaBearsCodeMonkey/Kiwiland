@@ -17,6 +17,8 @@ public class AllRoutesServiceImpl implements AllRoutesService {
         utility = new Utility();
     }
 
+    /*Needs a starting point, ending point, number of stops, and a string 'max' or 'exact' to choose whether or not
+    * you want to do <= or == */
     @Override
     public String getNumberOfStops(char startingStation, char endingStation, Integer maxStops, String chooseYourPath) {
         Integer source = utility.getIntValueOfChar(startingStation);
