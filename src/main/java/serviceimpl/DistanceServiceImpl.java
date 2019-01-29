@@ -7,7 +7,7 @@ import utility.Utility;
 import java.util.List;
 
 public class DistanceServiceImpl implements DistanceService {
-    private final List<Edge> graph[];
+    private final List<Edge>[] graph;
     private final Utility utility;
 
     public DistanceServiceImpl(List<Edge>[] graph) {
@@ -34,6 +34,7 @@ public class DistanceServiceImpl implements DistanceService {
                 if(station2 == edge.getRoute()){
                     totalDistance += edge.getDistance();
                     destinationWasFound = true;
+                    break;
                 }
             }
 
@@ -42,6 +43,6 @@ public class DistanceServiceImpl implements DistanceService {
             }
         }
 
-        return String.format("%d", totalDistance);
+        return String.valueOf(totalDistance);
     }
 }

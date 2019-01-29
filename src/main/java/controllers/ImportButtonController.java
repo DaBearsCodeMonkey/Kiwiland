@@ -17,13 +17,12 @@ public class ImportButtonController {
     }
 
     public void importFile(ActionEvent event){
-        String trainStations[];
+        String[] trainStations;
         FileChooser fileChooser = new FileChooser();
         File file;
-        String user = System.getProperty("user.name");
         fileChooser.setTitle("Open Text file");
-        fileChooser.setInitialDirectory(new File(String.format("C:\\Users\\%s\\Downloads", user)));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT file", "*txt"));
+        fileChooser.setInitialDirectory(isWindowsOrMac());
+       fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT file", "*.txt"));
         file = fileChooser.showOpenDialog(null);
 
         if(file != null) {
@@ -37,5 +36,17 @@ public class ImportButtonController {
 
             mainController.startUpKiwiland(trainStations);
         }
+    }
+
+    private File isWindowsOrMac(){
+        String userDirectoryString = System.getProperty("user.home");
+        File userDirectory = new File(userDirectoryString);
+
+
+        if(!userDirectory.canRead()) {
+            userDirectory = new File(String.format("C:\\Users\\%s\\Downloads", System.getProperty("user.name")));
+        }
+
+        return userDirectory;
     }
 }

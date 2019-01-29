@@ -7,7 +7,7 @@ import utility.Utility;
 import java.util.List;
 
 public class ShortestPathServiceImpl implements ShortestPathService {
-    private final List<Edge> graph[];
+    private final List<Edge>[] graph;
     private final Utility utility;
     private final int SIZE;
 
@@ -47,7 +47,7 @@ public class ShortestPathServiceImpl implements ShortestPathService {
     /*Dijkstra algorithm to find the shortest path*/
     private int dijkstraShortestPath(int source, int destination){
         int[] distance = new int[SIZE];
-        boolean shortestPathTree[] = new boolean[SIZE];
+        boolean[] shortestPathTree = new boolean[SIZE];
 
         for(int counter = 0; counter < SIZE; counter++){
             distance[counter] = Integer.MAX_VALUE;
@@ -57,15 +57,19 @@ public class ShortestPathServiceImpl implements ShortestPathService {
         distance[source] = 0;
 
         for(int count = 0; count < SIZE - 1; count++){
-            int u = getMinDistance(distance, shortestPathTree);
-            shortestPathTree[u] = true;
+            int index = getIndexOfMinDistance(distance, shortestPathTree);
+            shortestPathTree[index] = true;
 
-            for(Edge e : graph[u]){
+            if (shortestPathTree[destination]){
+                return distance[destination];
+            }
+
+            for(Edge e : graph[index]){
                 if(!shortestPathTree[e.getRoute()] &&
-                        distance[u] != Integer.MAX_VALUE &&
-                        distance[u] + e.getDistance() < distance[e.getRoute()]){
+                        distance[index] != Integer.MAX_VALUE &&
+                        distance[index] + e.getDistance() < distance[e.getRoute()]){
 
-                    distance[e.getRoute()] = distance[u] + e.getDistance();
+                    distance[e.getRoute()] = distance[index] + e.getDistance();
                 }
             }
         }
@@ -74,17 +78,17 @@ public class ShortestPathServiceImpl implements ShortestPathService {
     }
 
     /*Helper fucntion to find the minimum distance*/
-    private int getMinDistance(int distance[], boolean spt[]){
+    private int getIndexOfMinDistance(int[] distance, boolean[] spt){
         int min = Integer.MAX_VALUE;
-        int min_index = -1;
+        int minIndex = -1;
 
         for(int counter = 0; counter < SIZE; counter++){
             if(!spt[counter] && distance[counter] <= min){
                 min = distance[counter];
-                min_index = counter;
+                minIndex = counter;
             }
         }
 
-        return min_index;
+        return minIndex;
     }
 }
