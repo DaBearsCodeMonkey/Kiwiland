@@ -21,7 +21,7 @@ public class ImportButtonController {
         FileChooser fileChooser = new FileChooser();
         File file;
         fileChooser.setTitle("Open Text file");
-        fileChooser.setInitialDirectory(isWindowsOrMac());
+        fileChooser.setInitialDirectory(settingHomeDirectory());
        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT file", "*.txt"));
         file = fileChooser.showOpenDialog(null);
 
@@ -38,7 +38,7 @@ public class ImportButtonController {
         }
     }
 
-    private File isWindowsOrMac(){
+    private File settingHomeDirectory(){
         String userDirectoryString = System.getProperty("user.home");
         File userDirectory = new File(userDirectoryString);
 
