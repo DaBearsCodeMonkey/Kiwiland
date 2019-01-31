@@ -1,8 +1,8 @@
 package service.pojos;
 
 public class Edge {
-    private Integer route;
-    private Integer distance;
+    private final Integer route;
+    private final Integer distance;
 
     public Edge(Integer route, Integer distance) {
         this.route = route;

@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BuildTrainStationHelper {
-    private Utility utility = new Utility();
+    private final Utility utility = new Utility();
 
     public int getNumberOfUniqueTrainStations(String[] trainStations){
         Set<Character> uniqueCharacters = new HashSet<>();

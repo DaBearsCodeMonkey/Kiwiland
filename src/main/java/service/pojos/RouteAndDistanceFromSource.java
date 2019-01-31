@@ -1,8 +1,8 @@
 package service.pojos;
 
 public class RouteAndDistanceFromSource {
-    private Integer route;
-    private Integer distanceFromSource;
+    private final Integer route;
+    private final Integer distanceFromSource;
 
     public RouteAndDistanceFromSource(Integer route, Integer distanceFromSource) {
         this.route = route;
