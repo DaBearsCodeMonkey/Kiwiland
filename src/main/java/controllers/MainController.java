@@ -8,7 +8,7 @@ import serviceimpl.*;
 import javafx.fxml.FXML;
 import utility.BuildTrainStationHelper;
 
-class MainController {
+public class MainController {
 
     @FXML private ImportButtonController importButtonController;
 

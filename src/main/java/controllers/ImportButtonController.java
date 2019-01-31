@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-class ImportButtonController {
+public class ImportButtonController {
 
     private MainController mainController;
 
