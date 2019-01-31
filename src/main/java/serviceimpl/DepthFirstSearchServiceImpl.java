@@ -1,18 +1,18 @@
 package serviceimpl;
 
-import service.AllRoutesService;
+import service.DepthFirstSearchService;
 import service.pojos.Edge;
 import utility.Utility;
 
 import java.util.List;
 
 /*Modified depth first search algorithm without a visited variable because cycles are allowed*/
-public class AllRoutesServiceImpl implements AllRoutesService {
+public class DepthFirstSearchServiceImpl implements DepthFirstSearchService {
     private final List<Edge> graph[];
     private final Utility utility;
     private static int totalNumberOfRoutes;
 
-    public AllRoutesServiceImpl(List<Edge> graph[]){
+    public DepthFirstSearchServiceImpl(List<Edge> graph[]){
         this.graph = graph;
         utility = new Utility();
     }

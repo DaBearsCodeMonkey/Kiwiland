@@ -1,9 +1,9 @@
 package controllers;
 
-import service.AllRoutesService;
-import service.DifferentRoutesService;
+import service.DepthFirstSearchService;
+import service.BreadthFirstSearchService;
 import service.DistanceService;
-import service.ShortestPathService;
+import service.DijkstraService;
 import serviceimpl.*;
 import javafx.fxml.FXML;
 import utility.BuildTrainStationHelper;
@@ -21,27 +21,27 @@ public class MainController {
         BuildTrainStationHelper buildTrainStationHelper = new BuildTrainStationHelper();
         DirectedGraphServiceImpl kiwilandTrainStations = new DirectedGraphServiceImpl(buildTrainStationHelper.getNumberOfUniqueTrainStations(trainStations));
         buildTrainStationHelper.buildGraph(kiwilandTrainStations, trainStations);
-        final AllRoutesService allRoutesService = new AllRoutesServiceImpl(kiwilandTrainStations.getGraph());
-        final DifferentRoutesService differentRoutesService = new DifferentRoutesServiceImpl(kiwilandTrainStations.getGraph());
+        final DepthFirstSearchService depthFirstSearchService = new DepthFirstSearchServiceImpl(kiwilandTrainStations.getGraph());
+        final BreadthFirstSearchService breadthFirstSearchService = new BreadthFirstSearchServiceImpl(kiwilandTrainStations.getGraph());
         final DistanceService distanceService = new DistanceServiceImpl(kiwilandTrainStations.getGraph());
-        final ShortestPathService shortestPathService = new ShortestPathServiceImpl(kiwilandTrainStations.getGraph());
-        doTheFunAssignment(allRoutesService, differentRoutesService, distanceService, shortestPathService);
+        final DijkstraService dijkstraService = new DijkstraServiceImpl(kiwilandTrainStations.getGraph());
+        doTheFunAssignment(depthFirstSearchService, breadthFirstSearchService, distanceService, dijkstraService);
     }
 
-    private void doTheFunAssignment(AllRoutesService allRoutesService,
-                                    DifferentRoutesService differentRoutesService,
+    private void doTheFunAssignment(DepthFirstSearchService depthFirstSearchService,
+                                    BreadthFirstSearchService breadthFirstSearchService,
                                     DistanceService distanceService,
-                                    ShortestPathService shortestPathService){
+                                    DijkstraService dijkstraService){
 
         System.out.println(String.format("Output #1: %s", distanceService.getTotalDistance("A-B-C")));
         System.out.println(String.format("Output #2: %s", distanceService.getTotalDistance("A-D")));
         System.out.println(String.format("Output #3: %s", distanceService.getTotalDistance("A-D-C")));
         System.out.println(String.format("Output #4: %s", distanceService.getTotalDistance("A-E-B-C-D")));
         System.out.println(String.format("Output #5: %s", distanceService.getTotalDistance("A-E-D")));
-        System.out.println(String.format("Output #6: %s", allRoutesService.getNumberOfStops('C', 'C', 3, "max")));
-        System.out.println(String.format("Output #7: %s", allRoutesService.getNumberOfStops('A', 'C', 4, "exact")));
-        System.out.println(String.format("Output #8: %s", shortestPathService.getShortestRoute('A', 'C')));
-        System.out.println(String.format("Output #9: %s", shortestPathService.getShortestRoute('C', 'C')));
-        System.out.println(String.format("Output #10: %s", differentRoutesService.getDifferentRoutes('C', 'C', 30)));
+        System.out.println(String.format("Output #6: %s", depthFirstSearchService.getNumberOfStops('C', 'C', 3, "max")));
+        System.out.println(String.format("Output #7: %s", depthFirstSearchService.getNumberOfStops('A', 'C', 4, "exact")));
+        System.out.println(String.format("Output #8: %s", dijkstraService.getShortestRoute('A', 'C')));
+        System.out.println(String.format("Output #9: %s", dijkstraService.getShortestRoute('C', 'C')));
+        System.out.println(String.format("Output #10: %s", breadthFirstSearchService.getDifferentRoutes('C', 'C', 30)));
     }
 }

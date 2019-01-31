@@ -1,5 +1,5 @@
 package service;
 
-public interface DifferentRoutesService {
+public interface BreadthFirstSearchService {
     String getDifferentRoutes(char startingStation, char endingStation, int maxDistance);
 }

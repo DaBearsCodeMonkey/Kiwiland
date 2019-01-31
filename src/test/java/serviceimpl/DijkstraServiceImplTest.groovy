@@ -3,13 +3,13 @@ package serviceimpl
 import spock.lang.Specification
 import utility.BuildTrainStationHelper
 
-class ShortestPathServiceImplTest extends Specification {
+class DijkstraServiceImplTest extends Specification {
     def "Returns the shortest path (String) when given two points. Does a check to see if source == destination"(){
         given:
         def graph = new DirectedGraphServiceImpl(5)
         def graphHelper = new BuildTrainStationHelper()
         graphHelper.buildGraph(graph, (String[])["AB5", "BC4", "CD8", "DC8", "DE6", "AD5", "CE2", "EB3", "AE7"])
-        def service = new ShortestPathServiceImpl(graph.getGraph())
+        def service = new DijkstraServiceImpl(graph.getGraph())
 
         when:
         def actualResult = service.getShortestRoute(startingStation, endingStation)
@@ -30,7 +30,7 @@ class ShortestPathServiceImplTest extends Specification {
         def graph = new DirectedGraphServiceImpl(5)
         def graphHelper = new BuildTrainStationHelper()
         graphHelper.buildGraph(graph, (String[])["AB5", "BC4", "CD8", "DC8", "DE6", "AD5", "CE2", "EB3", "AE7"])
-        def service = new ShortestPathServiceImpl(graph.getGraph())
+        def service = new DijkstraServiceImpl(graph.getGraph())
 
         when:
         def actualResult = service.dijkstraShortestPath(startingStation, endingStation)
@@ -50,7 +50,7 @@ class ShortestPathServiceImplTest extends Specification {
         def graph = new DirectedGraphServiceImpl(5)
         def graphHelper = new BuildTrainStationHelper()
         graphHelper.buildGraph(graph, (String[])["AB5", "BC4", "CD8", "DC8", "DE6", "AD5", "CE2", "EB3", "AE7"])
-        def service = new ShortestPathServiceImpl(graph.getGraph())
+        def service = new DijkstraServiceImpl(graph.getGraph())
 
         when:
         def actualResult = service.getMinDistance(distanceArr, booleanArr)

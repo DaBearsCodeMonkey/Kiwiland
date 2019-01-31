@@ -1,5 +1,5 @@
 package service;
 
-public interface ShortestPathService {
+public interface DijkstraService {
     String getShortestRoute(char startingStation, char endingStation);
 }

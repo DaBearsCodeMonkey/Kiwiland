@@ -1,6 +1,6 @@
 package serviceimpl;
 
-import service.DifferentRoutesService;
+import service.BreadthFirstSearchService;
 import service.pojos.Edge;
 import service.pojos.RouteAndDistanceFromSource;
 import utility.Utility;
@@ -8,11 +8,11 @@ import utility.Utility;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DifferentRoutesServiceImpl implements DifferentRoutesService {
+public class BreadthFirstSearchServiceImpl implements BreadthFirstSearchService {
     private final List<Edge> graph[];
     private final Utility utility;
 
-    public DifferentRoutesServiceImpl(List<Edge>[] graph) {
+    public BreadthFirstSearchServiceImpl(List<Edge>[] graph) {
         this.graph = graph;
         utility = new Utility();
     }

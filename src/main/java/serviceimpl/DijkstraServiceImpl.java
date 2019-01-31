@@ -1,17 +1,17 @@
 package serviceimpl;
 
-import service.ShortestPathService;
+import service.DijkstraService;
 import service.pojos.Edge;
 import utility.Utility;
 
 import java.util.List;
 
-public class ShortestPathServiceImpl implements ShortestPathService {
+public class DijkstraServiceImpl implements DijkstraService {
     private final List<Edge>[] graph;
     private final Utility utility;
     private final int SIZE;
 
-    public ShortestPathServiceImpl(List<Edge>[] graph) {
+    public DijkstraServiceImpl(List<Edge>[] graph) {
         this.graph = graph;
         utility = new Utility();
         SIZE = graph.length;
