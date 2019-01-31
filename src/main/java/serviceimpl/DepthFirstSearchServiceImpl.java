@@ -8,11 +8,11 @@ import java.util.List;
 
 /*Modified depth first search algorithm without a visited variable because cycles are allowed*/
 public class DepthFirstSearchServiceImpl implements DepthFirstSearchService {
-    private final List<Edge> graph[];
+    private final List<Edge>[] graph;
     private final Utility utility;
     private static int totalNumberOfRoutes;
 
-    public DepthFirstSearchServiceImpl(List<Edge> graph[]){
+    public DepthFirstSearchServiceImpl(List<Edge>[] graph){
         this.graph = graph;
         utility = new Utility();
     }

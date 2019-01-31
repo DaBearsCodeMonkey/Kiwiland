@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BreadthFirstSearchServiceImpl implements BreadthFirstSearchService {
-    private final List<Edge> graph[];
+    private final List<Edge>[] graph;
     private final Utility utility;
 
     public BreadthFirstSearchServiceImpl(List<Edge>[] graph) {
