@@ -1,9 +1,6 @@
 package controllers;
 
-import service.DepthFirstSearchService;
-import service.BreadthFirstSearchService;
-import service.DistanceService;
-import service.DijkstraService;
+import service.*;
 import serviceimpl.*;
 import javafx.fxml.FXML;
 import utility.BuildTrainStationHelper;
@@ -19,7 +16,7 @@ public class MainController {
 
     void startUpKiwiland(String[] trainStations){
         BuildTrainStationHelper buildTrainStationHelper = new BuildTrainStationHelper();
-        DirectedGraphServiceImpl kiwilandTrainStations = new DirectedGraphServiceImpl(buildTrainStationHelper.getNumberOfUniqueTrainStations(trainStations));
+        DirectedGraphService kiwilandTrainStations = new DirectedGraphServiceImpl(buildTrainStationHelper.getNumberOfUniqueTrainStations(trainStations));
         buildTrainStationHelper.buildGraph(kiwilandTrainStations, trainStations);
         final DepthFirstSearchService depthFirstSearchService = new DepthFirstSearchServiceImpl(kiwilandTrainStations.getGraph());
         final BreadthFirstSearchService breadthFirstSearchService = new BreadthFirstSearchServiceImpl(kiwilandTrainStations.getGraph());

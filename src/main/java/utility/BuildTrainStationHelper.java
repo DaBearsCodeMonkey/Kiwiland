@@ -1,6 +1,6 @@
 package utility;
 
-import serviceimpl.DirectedGraphServiceImpl;
+import service.DirectedGraphService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +19,7 @@ public class BuildTrainStationHelper {
         return uniqueCharacters.size();
     }
 
-    public void buildGraph(DirectedGraphServiceImpl myGraph, String[] trainStations){
+    public void buildGraph(DirectedGraphService myGraph, String[] trainStations){
         int source;
         int destination;
         int distance;

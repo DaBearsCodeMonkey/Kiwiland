@@ -26,6 +26,7 @@ public class DirectedGraphServiceImpl implements DirectedGraphService {
     }
 
 
+    @Override
     public List<Edge>[] getGraph() {
         return graph;
     }
