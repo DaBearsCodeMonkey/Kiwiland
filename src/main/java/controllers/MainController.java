@@ -38,6 +38,7 @@ public class MainController {
         System.out.println(String.format("Output #5: %s", distanceService.getTotalDistance("A-E-D")));
         System.out.println(String.format("Output #6: %s", depthFirstSearchService.getNumberOfStops('C', 'C', 3, "max")));
         System.out.println(String.format("Output #7: %s", depthFirstSearchService.getNumberOfStops('A', 'C', 4, "exact")));
+        System.out.println(String.format("Output #8: %s", dijkstraService.getShortestRoute('A', 'C')));
         System.out.println(String.format("Output #9: %s", dijkstraService.getShortestRoute('C', 'C')));
         System.out.println(String.format("Output #10: %s", breadthFirstSearchService.getDifferentRoutes('C', 'C', 30)));
     }

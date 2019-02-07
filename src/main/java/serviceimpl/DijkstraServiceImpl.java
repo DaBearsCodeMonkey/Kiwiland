@@ -78,12 +78,12 @@ public class DijkstraServiceImpl implements DijkstraService {
     }
 
     /*Helper fucntion to find the minimum distance*/
-    private int getIndexOfMinDistance(int[] distance, boolean[] spt){
+    private int getIndexOfMinDistance(int[] distance, boolean[] shortestPathFound){
         int min = Integer.MAX_VALUE;
         int minIndex = -1;
 
         for(int counter = 0; counter < SIZE; counter++){
-            if(!spt[counter] && distance[counter] <= min){
+            if(!shortestPathFound[counter] && distance[counter] <= min){
                 min = distance[counter];
                 minIndex = counter;
             }
