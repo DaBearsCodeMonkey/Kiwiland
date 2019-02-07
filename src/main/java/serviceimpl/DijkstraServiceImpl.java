@@ -40,6 +40,9 @@ public class DijkstraServiceImpl implements DijkstraService {
             shortestDistance = dijkstraShortestPath(source, destination);
         }
 
+        if(shortestDistance == Integer.MAX_VALUE){
+            return "NO SUCH ROUTE";
+        }
 
         return String.valueOf(shortestDistance);
     }
@@ -83,7 +86,7 @@ public class DijkstraServiceImpl implements DijkstraService {
         int minIndex = -1;
 
         for(int counter = 0; counter < SIZE; counter++){
-            if(!shortestPathFound[counter] && distance[counter] <= min){
+            if(!shortestPathFound[counter] && distance[counter] < min){
                 min = distance[counter];
                 minIndex = counter;
             }
