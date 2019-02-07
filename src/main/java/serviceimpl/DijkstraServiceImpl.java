@@ -47,25 +47,25 @@ public class DijkstraServiceImpl implements DijkstraService {
     /*Dijkstra algorithm to find the shortest path*/
     private int dijkstraShortestPath(int source, int destination){
         int[] distance = new int[SIZE];
-        boolean[] stationVisited = new boolean[SIZE];
+        boolean[] shortestPathFound = new boolean[SIZE];
 
         for(int counter = 0; counter < SIZE; counter++){
             distance[counter] = Integer.MAX_VALUE;
-            stationVisited[counter] = false;
+            shortestPathFound[counter] = false;
         }
 
         distance[source] = 0;
 
         for(int count = 0; count < SIZE - 1; count++){
-            int index = getIndexOfMinDistance(distance, stationVisited);
-            stationVisited[index] = true;
+            int index = getIndexOfMinDistance(distance, shortestPathFound);
+            shortestPathFound[index] = true;
 
-            if (stationVisited[destination]){
+            if (shortestPathFound[destination]){
                 return distance[destination];
             }
 
             for(Edge e : graph[index]){
-                if(!stationVisited[e.getRoute()] &&
+                if(!shortestPathFound[e.getRoute()] &&
                         distance[index] != Integer.MAX_VALUE &&
                         distance[index] + e.getDistance() < distance[e.getRoute()]){
 
