@@ -10,7 +10,7 @@ import java.util.List;
 public class DepthFirstSearchServiceImpl implements DepthFirstSearchService {
     private final List<Edge>[] graph;
     private final Utility utility;
-    private static int totalNumberOfRoutes;
+    private int totalNumberOfRoutes;
 
     public DepthFirstSearchServiceImpl(List<Edge>[] graph){
         this.graph = graph;
@@ -42,35 +42,34 @@ public class DepthFirstSearchServiceImpl implements DepthFirstSearchService {
     }
 
 
-    private void findAllPathsExact(Integer index, Integer destination, Integer currentStop, Integer maxStops){
+    private void findAllPathsExact(Integer currentStop, Integer destination, Integer currentStopNumber, Integer maxStops){
 
-        if(currentStop > maxStops){
+        if(currentStopNumber > maxStops){
             return;
         }
 
-        if(index.equals(destination) && currentStop.equals(maxStops) && !currentStop.equals(0)){
+        if(currentStop.equals(destination) && currentStopNumber.equals(maxStops) && !currentStopNumber.equals(0)){
             totalNumberOfRoutes++;
             return;
         }
 
-        for(Edge temp : graph[index]){
-            findAllPathsExact(temp.getRoute(), destination, currentStop + 1, maxStops);
+        for(Edge temp : graph[currentStop]){
+            findAllPathsExact(temp.getRoute(), destination, currentStopNumber + 1, maxStops);
         }
     }
 
-    private void findAllPathsMaximum(Integer index, Integer destination, Integer currentStop, Integer maxStops){
+    private void findAllPathsMaximum(Integer currentStop, Integer destination, Integer currentStopNumber, Integer maxStops){
 
-        if(currentStop > maxStops){
+        if(currentStopNumber > maxStops){
             return;
         }
 
-        if(index.equals(destination) && !currentStop.equals(0)){
+        if(currentStop.equals(destination) && !currentStopNumber.equals(0)){
             totalNumberOfRoutes++;
-            return;
         }
 
-        for(Edge temp : graph[index]){
-            findAllPathsMaximum(temp.getRoute(), destination, currentStop + 1, maxStops);
+        for(Edge temp : graph[currentStop]){
+            findAllPathsMaximum(temp.getRoute(), destination, currentStopNumber + 1, maxStops);
         }
     }
 }
