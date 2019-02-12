@@ -37,11 +37,9 @@ public class DirectedGraphServiceImpl implements DirectedGraphService {
         }
     }
 
-
-    public void addRoute(int sourceStation, int destinationStation, int distance){
+    private void addRoute(int sourceStation, int destinationStation, int distance){
         graph[sourceStation].add(new Edge(destinationStation, distance));
     }
-
 
     @Override
     public List<Edge>[] getGraph() {
