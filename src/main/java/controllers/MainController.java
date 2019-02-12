@@ -1,9 +1,8 @@
 package controllers;
 
+import javafx.fxml.FXML;
 import service.*;
 import serviceimpl.*;
-import javafx.fxml.FXML;
-import utility.BuildTrainStationHelper;
 
 public class MainController {
 
@@ -16,8 +15,7 @@ public class MainController {
     }
 
     void startUpKiwiland(String[] trainStations){
-        BuildTrainStationHelper buildTrainStationHelper = new BuildTrainStationHelper();
-        DirectedGraphService kiwilandTrainStations = new DirectedGraphServiceImpl(buildTrainStationHelper.getNumberOfUniqueTrainStations(trainStations), trainStations);
+        DirectedGraphService kiwilandTrainStations = new DirectedGraphServiceImpl(trainStations);
         final DepthFirstSearchService depthFirstSearchService = new DepthFirstSearchServiceImpl(kiwilandTrainStations.getGraph());
         final BreadthFirstSearchService breadthFirstSearchService = new BreadthFirstSearchServiceImpl(kiwilandTrainStations.getGraph());
         final DistanceService distanceService = new DistanceServiceImpl(kiwilandTrainStations.getGraph());
