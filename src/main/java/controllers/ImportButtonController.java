@@ -22,7 +22,7 @@ public class ImportButtonController {
         File file;
         fileChooser.setTitle("Open Text file");
         fileChooser.setInitialDirectory(settingHomeDirectory());
-       fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT file", "*.txt"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT file", "*.txt"));
         file = fileChooser.showOpenDialog(null);
 
         if(file != null) {

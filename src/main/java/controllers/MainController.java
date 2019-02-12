@@ -17,8 +17,7 @@ public class MainController {
 
     void startUpKiwiland(String[] trainStations){
         BuildTrainStationHelper buildTrainStationHelper = new BuildTrainStationHelper();
-        DirectedGraphService kiwilandTrainStations = new DirectedGraphServiceImpl(buildTrainStationHelper.getNumberOfUniqueTrainStations(trainStations));
-        buildTrainStationHelper.buildGraph(kiwilandTrainStations, trainStations);
+        DirectedGraphService kiwilandTrainStations = new DirectedGraphServiceImpl(buildTrainStationHelper.getNumberOfUniqueTrainStations(trainStations), trainStations);
         final DepthFirstSearchService depthFirstSearchService = new DepthFirstSearchServiceImpl(kiwilandTrainStations.getGraph());
         final BreadthFirstSearchService breadthFirstSearchService = new BreadthFirstSearchServiceImpl(kiwilandTrainStations.getGraph());
         final DistanceService distanceService = new DistanceServiceImpl(kiwilandTrainStations.getGraph());

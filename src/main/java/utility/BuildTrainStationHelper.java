@@ -1,12 +1,9 @@
 package utility;
 
-import service.DirectedGraphService;
-
 import java.util.HashSet;
 import java.util.Set;
 
 public class BuildTrainStationHelper {
-    private final Utility utility = new Utility();
 
     public int getNumberOfUniqueTrainStations(String[] trainStations){
         Set<Character> uniqueCharacters = new HashSet<>();
@@ -17,19 +14,5 @@ public class BuildTrainStationHelper {
         }
 
         return uniqueCharacters.size();
-    }
-
-    public void buildGraph(DirectedGraphService myGraph, String[] trainStations){
-        int source;
-        int destination;
-        int distance;
-
-        for(String trainStation : trainStations){
-            source = utility.getIntValueOfChar(trainStation.charAt(0));
-            destination = utility.getIntValueOfChar(trainStation.charAt(1));
-            distance = Character.getNumericValue(trainStation.charAt(2));
-
-            myGraph.addRoute(source, destination, distance);
-        }
     }
 }
