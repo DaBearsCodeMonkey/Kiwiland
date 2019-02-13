@@ -1,7 +1,6 @@
 package serviceimpl
 
 import spock.lang.Specification
-import utility.BuildTrainStationHelper
 
 class DistanceServiceImplTest extends Specification {
     def "Returns total distance of all the stations"() {
