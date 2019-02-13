@@ -1,20 +1,21 @@
 package serviceimpl;
 
 import service.DijkstraService;
-import service.pojos.Edge;
-import utility.Utility;
+import service.pojo.Edge;
 
+import java.util.HashMap;
 import java.util.List;
 
+
+//TODO: change algorithm for hash-map
+
 public class DijkstraServiceImpl implements DijkstraService {
-    private final List<Edge>[] graph;
-    private final Utility utility;
+    private final HashMap<Character, List<Edge>> GRAPH;
     private final int SIZE;
 
-    public DijkstraServiceImpl(List<Edge>[] graph) {
-        this.graph = graph;
-        utility = new Utility();
-        SIZE = graph.length;
+    public DijkstraServiceImpl(HashMap<Character, List<Edge>> GRAPH) {
+        this.GRAPH = GRAPH;
+        SIZE = GRAPH.size();
     }
 
     /*Does a check to see if the source is the same as the destination. If true, then it looks for the shortest path
@@ -22,13 +23,11 @@ public class DijkstraServiceImpl implements DijkstraService {
     * algorithm.*/
     @Override
     public String getShortestRoute(char startingStation, char endingStation) {
-        int source = utility.getIntValueOfChar(startingStation);
-        int destination = utility.getIntValueOfChar(endingStation);
         int shortestDistance = 0;
 
-        if(source == destination){
-            for(Edge e : graph[source]){
-                int currentDistance = dijkstraShortestPath(source, e.getRoute()) + dijkstraShortestPath(e.getRoute(), source);
+        if(startingStation == endingStation){
+            for(Edge e : GRAPH.get(startingStation)){
+                int currentDistance = dijkstraShortestPath(startingStation, e.getRoute()) + dijkstraShortestPath(e.getRoute(), startingStation);
 
                 if(shortestDistance == 0 || shortestDistance > currentDistance){
                     shortestDistance = currentDistance;
@@ -37,7 +36,7 @@ public class DijkstraServiceImpl implements DijkstraService {
         }
 
         else{
-            shortestDistance = dijkstraShortestPath(source, destination);
+            shortestDistance = dijkstraShortestPath(startingStation, endingStation);
         }
 
         if(shortestDistance == Integer.MAX_VALUE){
@@ -48,7 +47,7 @@ public class DijkstraServiceImpl implements DijkstraService {
     }
 
     /*Dijkstra algorithm to find the shortest path*/
-    private int dijkstraShortestPath(int source, int destination){
+    private int dijkstraShortestPath(char source, char destination){
         int[] distance = new int[SIZE];
         boolean[] shortestPathFound = new boolean[SIZE];
 
@@ -67,7 +66,7 @@ public class DijkstraServiceImpl implements DijkstraService {
                 return distance[destination];
             }
 
-            for(Edge e : graph[index]){
+            for(Edge e : GRAPH.get(index)){
                 if(!shortestPathFound[e.getRoute()] &&
                         distance[index] != Integer.MAX_VALUE &&
                         distance[index] + e.getDistance() < distance[e.getRoute()]){

@@ -1,20 +1,18 @@
 package serviceimpl;
 
 import service.BreadthFirstSearchService;
-import service.pojos.Edge;
-import service.pojos.RouteAndDistanceFromSource;
-import utility.Utility;
+import service.pojo.Edge;
+import service.pojo.RouteAndDistanceFromSource;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 public class BreadthFirstSearchServiceImpl implements BreadthFirstSearchService {
-    private final List<Edge>[] graph;
-    private final Utility utility;
+    private final HashMap<Character, List<Edge>> GRAPH;
 
-    public BreadthFirstSearchServiceImpl(List<Edge>[] graph) {
-        this.graph = graph;
-        utility = new Utility();
+    public BreadthFirstSearchServiceImpl(HashMap<Character, List<Edge>> GRAPH) {
+        this.GRAPH = GRAPH;
     }
 
     /*Does a modified Breadth First Search to find all the different routes when given a maximum distance.
@@ -22,22 +20,20 @@ public class BreadthFirstSearchServiceImpl implements BreadthFirstSearchService 
     @Override
     public String getDifferentRoutes(char startingStation, char endingStation, int maxDistance) {
         LinkedList<RouteAndDistanceFromSource> queue = new LinkedList<>();
-        Integer source = utility.getIntValueOfChar(startingStation);
-        int destination = utility.getIntValueOfChar(endingStation);
         int currentNumberOfRoutes = 0;
-        queue.add(new RouteAndDistanceFromSource(source, 0));
+        queue.add(new RouteAndDistanceFromSource(startingStation, 0));
 
         while(!queue.isEmpty()){
             RouteAndDistanceFromSource tempObj = queue.poll();
-            int index = tempObj.getRoute();
+            char currentStop = tempObj.getRoute();
             int currentDistance = tempObj.getDistanceFromSource();
 
-            if(index == destination && currentDistance < maxDistance && currentDistance!= 0){
+            if(currentStop == endingStation && currentDistance < maxDistance && currentDistance!= 0){
                 currentNumberOfRoutes++;
             }
 
             if(currentDistance < maxDistance) {
-                for (Edge temp : graph[index]) {
+                for (Edge temp : GRAPH.get(currentStop)) {
                     queue.add(new RouteAndDistanceFromSource(temp.getRoute(), currentDistance + temp.getDistance()));
                 }
             }

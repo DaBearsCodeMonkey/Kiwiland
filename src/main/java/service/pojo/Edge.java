@@ -1,4 +1,4 @@
-package service.pojos;
+package service.pojo;
 
 public class Edge {
     private final Character route;

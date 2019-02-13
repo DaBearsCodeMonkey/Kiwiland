@@ -1,37 +1,34 @@
 package serviceimpl;
 
 import service.DepthFirstSearchService;
-import service.pojos.Edge;
+import service.pojo.Edge;
 import utility.Utility;
 
+import java.util.HashMap;
 import java.util.List;
 
 /*Modified depth first search algorithm without a visited variable because cycles are allowed*/
 public class DepthFirstSearchServiceImpl implements DepthFirstSearchService {
-    private final List<Edge>[] graph;
-    private final Utility utility;
+    private final HashMap<Character, List<Edge>> GRAPH;
     private int totalNumberOfRoutes;
 
-    public DepthFirstSearchServiceImpl(List<Edge>[] graph){
-        this.graph = graph;
-        utility = new Utility();
+    public DepthFirstSearchServiceImpl(final HashMap<Character, List<Edge>> GRAPH){
+        this.GRAPH = GRAPH;
     }
 
     /*Needs a starting point, ending point, number of stops, and a string 'max' or 'exact' to choose whether or not
     * you want to do <= or == */
     @Override
     public String getNumberOfStops(char startingStation, char endingStation, Integer maxStops, String chooseYourPath) {
-        Integer source = utility.getIntValueOfChar(startingStation);
-        Integer destination = utility.getIntValueOfChar(endingStation);
         Integer currentStop = 0;
         totalNumberOfRoutes = 0;
 
         if(chooseYourPath.toLowerCase().matches("max")){
-            findAllPathsMaximum(source, destination, currentStop, maxStops);
+            findAllPathsMaximum(startingStation, endingStation, currentStop, maxStops);
         }
 
         else if(chooseYourPath.toLowerCase().matches("exact")){
-            findAllPathsExact(source, destination, currentStop, maxStops);
+            findAllPathsExact(startingStation, endingStation, currentStop, maxStops);
         }
 
         else{
@@ -42,7 +39,7 @@ public class DepthFirstSearchServiceImpl implements DepthFirstSearchService {
     }
 
 
-    private void findAllPathsExact(Integer currentStop, Integer destination, Integer currentStopNumber, Integer maxStops){
+    private void findAllPathsExact(Character currentStop, Character destination, Integer currentStopNumber, Integer maxStops){
 
         if(currentStopNumber > maxStops){
             return;
@@ -53,12 +50,12 @@ public class DepthFirstSearchServiceImpl implements DepthFirstSearchService {
             return;
         }
 
-        for(Edge temp : graph[currentStop]){
+        for(Edge temp : GRAPH.get(currentStop)){
             findAllPathsExact(temp.getRoute(), destination, currentStopNumber + 1, maxStops);
         }
     }
 
-    private void findAllPathsMaximum(Integer currentStop, Integer destination, Integer currentStopNumber, Integer maxStops){
+    private void findAllPathsMaximum(Character currentStop, Character destination, Integer currentStopNumber, Integer maxStops){
 
         if(currentStopNumber > maxStops){
             return;
@@ -68,7 +65,7 @@ public class DepthFirstSearchServiceImpl implements DepthFirstSearchService {
             totalNumberOfRoutes++;
         }
 
-        for(Edge temp : graph[currentStop]){
+        for(Edge temp : GRAPH.get(currentStop)){
             findAllPathsMaximum(temp.getRoute(), destination, currentStopNumber + 1, maxStops);
         }
     }

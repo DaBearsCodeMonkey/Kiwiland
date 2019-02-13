@@ -1,18 +1,19 @@
 package serviceimpl;
 
 import service.DirectedGraphService;
-import service.pojos.Edge;
+import service.pojo.Edge;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
+
 
 /*This class builds the graph needed for the whole assignment*/
 public class DirectedGraphServiceImpl implements DirectedGraphService {
-    private final TreeMap<Character, List<Edge>> GRAPH = new TreeMap<>();
+    private final HashMap<Character, List<Edge>> GRAPH;
 
-    @SuppressWarnings("unchecked")
     public DirectedGraphServiceImpl(String[] trainStations) {
+        GRAPH = new HashMap<>();
         buildGraph(trainStations);
     }
 
@@ -27,15 +28,13 @@ public class DirectedGraphServiceImpl implements DirectedGraphService {
                 GRAPH.put(trainStation.charAt(SOURCE), new ArrayList<>());
             }
 
-            else{
-                GRAPH.get(trainStation.charAt(SOURCE)).add(new Edge(trainStation.charAt(DESTINATION),
-                                                               Character.getNumericValue(trainStation.charAt(DISTANCE))));
-            }
+            GRAPH.get(trainStation.charAt(SOURCE)).add(new Edge(trainStation.charAt(DESTINATION),
+                                                                Character.getNumericValue(trainStation.charAt(DISTANCE))));
         }
     }
 
     @Override
-    public TreeMap<Character, List<Edge>> getGraph() {
+    public HashMap<Character, List<Edge>> getGraph() {
         return GRAPH;
     }
 }

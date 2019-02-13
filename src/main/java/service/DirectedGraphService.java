@@ -1,10 +1,11 @@
 package service;
 
-import service.pojos.Edge;
+import service.pojo.Edge;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
+
 
 public interface DirectedGraphService {
-    TreeMap<Character, List<Edge>> getGraph();
+    HashMap<Character, List<Edge>> getGraph();
 }
