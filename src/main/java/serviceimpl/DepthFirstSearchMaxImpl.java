@@ -15,7 +15,6 @@ public class DepthFirstSearchMaxImpl implements DepthFirstSearchService {
         this.GRAPH = GRAPH;
     }
 
-
     @Override
     public String getNumberOfStops(char startingStation, char endingStation, Integer maxStops) {
         Integer currentStop = 0;
