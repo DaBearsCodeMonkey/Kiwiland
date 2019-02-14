@@ -2,7 +2,7 @@ package serviceimpl;
 
 import service.DijkstraService;
 import service.pojo.Edge;
-import service.pojo.ShortestDistanceDAO;
+import service.pojo.ShortestDistance;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +47,7 @@ public class DijkstraServiceImpl implements DijkstraService {
 
     /*Dijkstra algorithm to find the shortest path*/
     private int dijkstraShortestPath(char source, char destination){
-        HashMap<Character, ShortestDistanceDAO> shortestDistance = createDistanceAndVisitedMap();
+        HashMap<Character, ShortestDistance> shortestDistance = createDistanceAndVisitedMap();
         shortestDistance.get(source).setDistance(0);
 
         for(int count = 0; count < SIZE - 1; count++){
@@ -70,18 +70,18 @@ public class DijkstraServiceImpl implements DijkstraService {
         return shortestDistance.get(destination).getDistance();
     }
 
-    private HashMap<Character, ShortestDistanceDAO> createDistanceAndVisitedMap(){
-        HashMap<Character, ShortestDistanceDAO> distanceAndVisited = new HashMap<>();
+    private HashMap<Character, ShortestDistance> createDistanceAndVisitedMap(){
+        HashMap<Character, ShortestDistance> distanceAndVisited = new HashMap<>();
 
         for(char key: GRAPH.keySet()){
-            distanceAndVisited.put(key, new ShortestDistanceDAO());
+            distanceAndVisited.put(key, new ShortestDistance());
         }
 
         return distanceAndVisited;
     }
 
     /*Helper function to find the minimum distance*/
-    private char getKeyOfMinDistance(HashMap<Character, ShortestDistanceDAO> distance){
+    private char getKeyOfMinDistance(HashMap<Character, ShortestDistance> distance){
         int min = Integer.MAX_VALUE;
         char trainStationKey = '\0';
 

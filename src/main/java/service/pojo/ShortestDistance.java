@@ -1,10 +1,10 @@
 package service.pojo;
 
-public class ShortestDistanceDAO {
+public class ShortestDistance {
     private int distance;
     private boolean shortestDistanceFound;
 
-    public ShortestDistanceDAO() {
+    public ShortestDistance() {
         distance = Integer.MAX_VALUE;
     }
 
