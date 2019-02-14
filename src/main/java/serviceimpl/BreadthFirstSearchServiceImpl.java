@@ -2,7 +2,7 @@ package serviceimpl;
 
 import service.BreadthFirstSearchService;
 import service.pojo.Edge;
-import service.pojo.RouteAndDistanceFromSource;
+import service.pojo.BreadthFirstSearch;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -19,13 +19,13 @@ public class BreadthFirstSearchServiceImpl implements BreadthFirstSearchService 
     * Requirements stated it was not inclusive so I made it so it is not inclusive of the maxDistance*/
     @Override
     public String getDifferentRoutes(char startingStation, char endingStation, int maxDistance) {
-        LinkedList<RouteAndDistanceFromSource> queue = new LinkedList<>();
+        LinkedList<BreadthFirstSearch> queue = new LinkedList<>();
         int currentNumberOfRoutes = 0;
-        queue.add(new RouteAndDistanceFromSource(startingStation, 0));
+        queue.add(new BreadthFirstSearch(startingStation, 0));
 
         while(!queue.isEmpty()){
-            RouteAndDistanceFromSource tempObj = queue.poll();
-            char currentStop = tempObj.getRoute();
+            BreadthFirstSearch tempObj = queue.poll();
+            char currentStop = tempObj.getCurrentRoute();
             int currentDistance = tempObj.getDistanceFromSource();
 
             if(currentStop == endingStation && currentDistance < maxDistance && currentDistance!= 0){
@@ -34,7 +34,7 @@ public class BreadthFirstSearchServiceImpl implements BreadthFirstSearchService 
 
             if(currentDistance < maxDistance) {
                 for (Edge temp : GRAPH.get(currentStop)) {
-                    queue.add(new RouteAndDistanceFromSource(temp.getRoute(), currentDistance + temp.getDistance()));
+                    queue.add(new BreadthFirstSearch(temp.getRoute(), currentDistance + temp.getDistance()));
                 }
             }
         }
