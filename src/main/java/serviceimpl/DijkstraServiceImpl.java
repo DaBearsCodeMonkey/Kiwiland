@@ -60,8 +60,7 @@ public class DijkstraServiceImpl implements DijkstraService {
 
             for(Edge e : GRAPH.get(key)){
                 if(!shortestDistance.get(e.getRoute()).isShortestDistanceFound() &&
-                        shortestDistance.get(key).getDistance() != Integer.MAX_VALUE &&
-                        shortestDistance.get(key).getDistance() + e.getDistance() < shortestDistance.get(e.getRoute()).getDistance()){
+                   shortestDistance.get(key).getDistance() + e.getDistance() < shortestDistance.get(e.getRoute()).getDistance()){
 
                     shortestDistance.get(e.getRoute()).setDistance(shortestDistance.get(key).getDistance() + e.getDistance());
                 }
