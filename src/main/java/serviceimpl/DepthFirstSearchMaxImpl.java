@@ -32,7 +32,9 @@ public class DepthFirstSearchMaxImpl implements DepthFirstSearchService {
             return;
         }
 
-        if(depthFirstSearch.getCurrentStation().equals(depthFirstSearch.getDestination()) && !depthFirstSearch.getCurrentDepth().equals(0)){
+        if(depthFirstSearch.getCurrentStation().equals(depthFirstSearch.getDestination()) &&
+           !depthFirstSearch.getCurrentDepth().equals(0)){
+
             totalNumberOfRoutes++;
         }
 
